@@ -11,8 +11,14 @@ class RobsTreeWalker {
                 }
                 console.log(prop);
                 const childObj = obj[prop];
+                if (this.isPrimitive(childObj)) {
+                    continue;
+                }
                 this.walk(childObj);
             }
+        };
+        this.isPrimitive = (test) => {
+            return test !== Object(test);
         };
     }
 }
