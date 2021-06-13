@@ -1,22 +1,13 @@
-const carCollections: object = {
-    'RobsCars': [
-        {'Make':'Ford', 'Model': 'F150', 'Year': '2011', 'PreviousOwners': ['Carl']}
-        ,{'Make':'Jeep', 'Model': 'Wrangler', 'Year': '2015', 'PreviousOwners': ['Amanda', 'Larry']}
-    ],
-    'JerrysCars': [
-        {'Make':'BMW', 'Model': 'M3', 'Year': '2016', 'PreviousOwners': []}
-        ,{'Make':'Lexus', 'Model': 'LS400', 'Year': '2014', 'PreviousOwners': ['Charles', 'Tom', 'Greg']}
-    ],
-    'JennysCars': [
-        {'Make':'Subaru', 'Model': 'WRX', 'Year': '2009', 'PreviousOwners': ['Will', 'John', 'Jerry']}
-        ,{'Make':'Chevy', 'Model': 'Camaro', 'Year': '2017', 'PreviousOwners': ['Amanda']}
-    ]
-}
-
 export class RobsTreeWalker {
 
-    walk = (treeObj: object): void => {
-        console.log('starting walk')
+    walk = (obj: object): void => {
+        // console.log('starting walk')
+        for (let prop in obj) {
+            if (!Object.prototype.hasOwnProperty.call(obj, prop)) { continue }
+            console.log(prop)
+            const childObj = (obj as any)[prop]
+            this.walk(childObj)
+        }
     }
 
 }
