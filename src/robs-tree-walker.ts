@@ -1,45 +1,42 @@
 export class RobsTreeWalker {
 
-    walkObject = (obj: object): void => {
-        console.log('starting walk')
-        this.walk(null, obj)
-        console.log('walk complete')
+    walk = (obj: object): void => {
+        console.log('Starting walk')
+        this.walkElement(null, obj)
+        console.log('Walk complete')
     }
 
-    private walk = (key: string | null, obj: object): void => {
-        if (Array.isArray(obj)) {
-            if (!key){
-                console.log('Analyzing array object root')
+    private walkElement = (key: string | null, value: any): void => {
+        if (this.isPrimitive(value)) {
+            if (!key) {
+                console.log(`Element is not an object or an array. Single value found: '${value}'`)
             } else {
-                console.log(`Analyzing array with key: '${key}'`)
+                console.log(`Leaf found. '${key}': '${value}'`)
             }
-            const ar = obj
+        } else if (Array.isArray(value)) {
+            const ar = value;
+            if (!key){
+                console.log('Walking from element root. Found array.')
+            } else {
+                console.log(`Walking into array with key: '${key}'`)
+            }
             for (let idx in ar) {
-                console.log(`Analyzing '${key}' array member at index ${idx}`)
-                const prop = `${key}.${idx}`
-                const memberObj = ar[idx]
-                if (this.isPrimitive(memberObj)) {
-                    const value = memberObj
-                    console.log(`Leaf found. '${prop}': '${value}'`)
-                    continue
-                }
-                this.walk(prop, memberObj)
+                const propAlias = `${key}.${idx}`
+                const memberElem = ar[idx]
+                this.walkElement(propAlias, memberElem)
             }
         } else {
+            // value must be an object
+            const obj = value
             if (!key){
-                console.log('Analyzing object root')
+                console.log('Walking from element root. Found to be an object.')
             } else {
-                console.log(`Analyzing object with key: '${key}'`)
+                console.log(`Walking into element object with key: '${key}'`)
             }
             for (let prop in obj) {
                 if (!Object.prototype.hasOwnProperty.call(obj, prop)) { continue }
-                const childObj = (obj as any)[prop]
-                if (this.isPrimitive(childObj)) {
-                    const value = childObj
-                    console.log(`Leaf found. '${prop}': '${value}'`)
-                    continue
-                }
-                this.walk(prop, childObj)
+                const childElem = obj[prop]
+                this.walkElement(prop, childElem)
             }
         }
     }
