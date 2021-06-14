@@ -1,5 +1,5 @@
-import { RobsTreeWalker } from "./robs-tree-walker"
-import { carCollections } from "./sample-tree-objects"
+import { TreeWalker } from "./tree-walker"
+import { CarCollections } from "./car-collections"
 
-const walker = new RobsTreeWalker()
-walker.walk(carCollections)
+const walker = new TreeWalker()
+walker.walk(CarCollections)

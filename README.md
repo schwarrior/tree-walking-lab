@@ -16,7 +16,7 @@ tree-walking-lab
 
 # Introduction
 
-A playground to experiment with different algorithms for navigating and recusing through object chains
+An prototype algorithm for navigating and recusing through object chains. Written in TypeScript.
 
 
 # ASCII Art 

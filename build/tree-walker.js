@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RobsTreeWalker = void 0;
-class RobsTreeWalker {
+exports.TreeWalker = void 0;
+class TreeWalker {
     constructor() {
         this.walk = (obj) => {
             this.stack = new Array();
@@ -64,11 +64,7 @@ class RobsTreeWalker {
         this.isPrimitive = (test) => {
             return test !== Object(test);
         };
-        this.isString = (test) => {
-            const isStr = (typeof test === 'string' || test instanceof String);
-            return isStr;
-        };
     }
 }
-exports.RobsTreeWalker = RobsTreeWalker;
-//# sourceMappingURL=robs-tree-walker.js.map
+exports.TreeWalker = TreeWalker;
+//# sourceMappingURL=tree-walker.js.map

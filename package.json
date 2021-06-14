@@ -1,7 +1,7 @@
 {
   "name": "tree-walking-lab",
   "version": "1.0.0",
-  "description": "A playground to experiment with different algorithms for navigating and recusing through object chains",
+  "description": "An prototype algorithm for navigating and recusing through object chains. Written in TypeScript.",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

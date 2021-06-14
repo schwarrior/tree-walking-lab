@@ -1,10 +1,6 @@
-interface Element {
-    key: string | null
-    value: any
-    parent: any
-}
+import { Element } from "./element"
 
-export class RobsTreeWalker {
+export class TreeWalker {
 
     walk = (obj: object): void => {
         this.stack = new Array<Element>()
@@ -63,11 +59,6 @@ export class RobsTreeWalker {
 
     private isPrimitive = (test: any): boolean => {
         return test !== Object(test)
-    }
-
-    private isString = (test: any): boolean => {
-        const isStr = (typeof test === 'string' || test instanceof String)
-        return isStr
     }
 
 }

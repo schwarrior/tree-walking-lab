@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.carCollections = void 0;
-exports.carCollections = {
+exports.CarCollections = void 0;
+exports.CarCollections = {
     'RobsCars': [
         { 'Make': 'Ford', 'Model': 'F150', 'Year': '2011', 'PreviousOwners': ['Carl'] },
         { 'Make': 'Jeep', 'Model': 'Wrangler', 'Year': '2015', 'PreviousOwners': ['Amanda', 'Larry'] }
@@ -15,4 +15,4 @@ exports.carCollections = {
         { 'Make': 'Chevy', 'Model': 'Camaro', 'Year': '2017', 'PreviousOwners': ['Amanda'] }
     ]
 };
-//# sourceMappingURL=sample-tree-objects.js.map
+//# sourceMappingURL=car-collections.js.map

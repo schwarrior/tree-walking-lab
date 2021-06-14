@@ -1,4 +1,4 @@
-export const carCollections: object = {
+export const CarCollections: object = {
     'RobsCars': [
         { 'Make': 'Ford', 'Model': 'F150', 'Year': '2011', 'PreviousOwners': ['Carl'] }
         , { 'Make': 'Jeep', 'Model': 'Wrangler', 'Year': '2015', 'PreviousOwners': ['Amanda', 'Larry'] }
