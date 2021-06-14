@@ -2,15 +2,17 @@ import { Element } from "./element"
 
 export class TreeWalker {
 
-    walk = (obj: object): void => {
+    walk = (obj: object): number => {
         this.stack = new Array<Element>()
+        this.elementsWalked = 0
         console.log('Starting walk')
         const rootElem: Element = {key: null, value: obj, parent: null}
-        this.walkElement(rootElem, this.stackElement)
-        console.log('Walk complete')
+        const walkCount = this.walkElement(rootElem, this.stackElement)
+        console.log(`Walk complete. Walked ${walkCount} elements`)
         console.log('')
         console.log('Stack values:')
         console.dir(this.stack)
+        return this.elementsWalked
     }
 
     private stack: Array<Element> = []
@@ -19,7 +21,10 @@ export class TreeWalker {
         this.stack.push(elem)
     } 
 
-    private walkElement = (elem: Element, elementAction: {(elem: Element) : void}): void => {
+    private elementsWalked = 0
+
+    private walkElement = (elem: Element, elementAction: {(elem: Element) : void}): number => {
+        this.elementsWalked++
         elementAction(elem)
         if (this.isPrimitive(elem.value)) {
             if (!elem.key) {
@@ -55,6 +60,7 @@ export class TreeWalker {
                 this.walkElement(childElem, elementAction)
             }
         }
+        return this.elementsWalked
     }
 
     private isPrimitive = (test: any): boolean => {

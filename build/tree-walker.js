@@ -5,19 +5,23 @@ class TreeWalker {
     constructor() {
         this.walk = (obj) => {
             this.stack = new Array();
+            this.elementsWalked = 0;
             console.log('Starting walk');
             const rootElem = { key: null, value: obj, parent: null };
-            this.walkElement(rootElem, this.stackElement);
-            console.log('Walk complete');
+            const walkCount = this.walkElement(rootElem, this.stackElement);
+            console.log(`Walk complete. Walked ${walkCount} elements`);
             console.log('');
             console.log('Stack values:');
             console.dir(this.stack);
+            return this.elementsWalked;
         };
         this.stack = [];
         this.stackElement = (elem) => {
             this.stack.push(elem);
         };
+        this.elementsWalked = 0;
         this.walkElement = (elem, elementAction) => {
+            this.elementsWalked++;
             elementAction(elem);
             if (this.isPrimitive(elem.value)) {
                 if (!elem.key) {
@@ -60,6 +64,7 @@ class TreeWalker {
                     this.walkElement(childElem, elementAction);
                 }
             }
+            return this.elementsWalked;
         };
         this.isPrimitive = (test) => {
             return test !== Object(test);
