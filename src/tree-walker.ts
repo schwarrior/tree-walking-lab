@@ -6,7 +6,7 @@ export class TreeWalker {
         this.stack = new Array<Element>()
         this.elementsWalked = 0
         console.log('Starting walk')
-        const rootElem: Element = {key: null, value: obj, parent: null}
+        const rootElem: Element = {key: undefined, value: obj, parent: undefined}
         const walkCount = this.walkElement(rootElem, this.stackElement)
         console.log(`Walk complete. Walked ${walkCount} elements`)
         console.log('')
@@ -42,7 +42,7 @@ export class TreeWalker {
             for (let idx in ar) {
                 const propAlias = `${elem.key}.${idx}`
                 const memberVal = ar[idx]
-                const childElem: Element = {key: propAlias, value: memberVal, parent: ar}
+                const childElem: Element = {key: propAlias, value: memberVal, parent: elem}
                 this.walkElement(childElem, elementAction)
             }
         } else {
@@ -56,7 +56,7 @@ export class TreeWalker {
             for (let prop in obj) {
                 if (!Object.prototype.hasOwnProperty.call(obj, prop)) { continue }
                 const childVal = obj[prop]
-                const childElem: Element = {key: prop, value: childVal, parent: obj}
+                const childElem: Element = {key: prop, value: childVal, parent: elem}
                 this.walkElement(childElem, elementAction)
             }
         }

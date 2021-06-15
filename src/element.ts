@@ -1,5 +1,5 @@
 export interface Element {
-    key: string | null
+    key?: string
     value: any
-    parent: any
+    parent?: Element
 }
