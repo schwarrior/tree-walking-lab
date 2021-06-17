@@ -23,23 +23,25 @@ export class TreeWalker {
 
     private elementsWalked = 0
 
-    private walkElement = (elem: Element, elementAction: {(elem: Element) : void}): number => {
-        this.elementsWalked++
+    private walkElement = (elem: Element, elementAction: {(e: Element) : void}): number => {
         elementAction(elem)
+        this.elementsWalked++
         if (this.isPrimitive(elem.value)) {
+            elem.leafValue = elem.value as unknown as string
             if (!elem.key) {
                 console.log(`Element is not an object or an array. Single value found: '${elem.value}'`)
             } else {
                 console.log(`Leaf found. '${elem.key}': '${elem.value}'`)
             }
         } else if (Array.isArray(elem.value)) {
+            elem.isArray = true
             const ar = elem.value as []
             if (!elem.key){
                 console.log('Walking from element root. Found array.')
             } else {
                 console.log(`Walking into array with key: '${elem.key}'`)
             }
-            for (let idx in ar) {
+            for (let idx = 0; idx < ar.length; idx ++) {
                 const propAlias = `${elem.key}.${idx}`
                 const memberVal = ar[idx]
                 const childElem: Element = {key: propAlias, value: memberVal, parent: elem}

@@ -21,9 +21,10 @@ class TreeWalker {
         };
         this.elementsWalked = 0;
         this.walkElement = (elem, elementAction) => {
-            this.elementsWalked++;
             elementAction(elem);
+            this.elementsWalked++;
             if (this.isPrimitive(elem.value)) {
+                elem.leafValue = elem.value;
                 if (!elem.key) {
                     console.log(`Element is not an object or an array. Single value found: '${elem.value}'`);
                 }
@@ -32,6 +33,7 @@ class TreeWalker {
                 }
             }
             else if (Array.isArray(elem.value)) {
+                elem.isArray = true;
                 const ar = elem.value;
                 if (!elem.key) {
                     console.log('Walking from element root. Found array.');
@@ -39,7 +41,7 @@ class TreeWalker {
                 else {
                     console.log(`Walking into array with key: '${elem.key}'`);
                 }
-                for (let idx in ar) {
+                for (let idx = 0; idx < ar.length; idx++) {
                     const propAlias = `${elem.key}.${idx}`;
                     const memberVal = ar[idx];
                     const childElem = { key: propAlias, value: memberVal, parent: elem };
